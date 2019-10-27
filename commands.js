@@ -6,7 +6,6 @@ const keys = require("./keys.js");
 const spotify = new Spotify(keys.spotify);
 const omdbKey = keys.omdb.id;
 
-
 const commands = {
     concert(concertInput) {
          // call to bandsintown api

@@ -65,6 +65,34 @@ function commands(command, ...args) {
         default:
             break;
     }
+
+    let commandLog = `${command}, ${args.join(' ')}, `
+    if (args == false) {
+        switch (command) {
+            case 'concert-this':
+                commandLog = `${command}, Warren G, `
+                break;
+
+            case 'spotify-this-song':
+                commandLog = `${command}, The sign Ace of base, `
+                break;
+
+            case 'movie-this':
+                commandLog = `${command}, Mr. Nobody, `
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    fs.appendFile("log.txt", commandLog, err => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Command Logged');
+        }
+    })
 }
 
 commands(process.argv[2], ...process.argv.slice(3))
