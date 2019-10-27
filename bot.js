@@ -17,20 +17,26 @@ const omdbKey = keys.omdb.id;
 function commands(command, ...args) {
     switch (command) {
         case 'concert-this':
+            // concatenate all arguments after initial command
             let prevArgConcert = '';
             args.forEach(el => {
                 el = prevArgConcert + el;
                 prevArgConcert = el;
             })
 
+            // call to bandsintown api
             axios.get(`https://rest.bandsintown.com/artists/${prevArgConcert}/events?app_id=codingbootcamp`).then(response => {
+                // if there are no events
                 if (response.data == false) {
                     console.log('There are no events for this artist');
+                // if there is no region to log, log without it
                 } else if (response.data[0].venue.region == false) {
                     console.log(`\n${response.data[0].lineup[0]} plays at ${response.data[0].venue.name} in ${response.data[0].venue.city}, ${response.data[0].venue.country} on ${Moment(response.data[0].datetime).format('MM/DD/YYYY hh:mm')}`);
+                // log all relevant data
                 } else {
                     console.log(`\n${response.data[0].lineup[0]} plays at ${response.data[0].venue.name} in ${response.data[0].venue.city}, ${response.data[0].venue.region}, ${response.data[0].venue.country} on ${Moment(response.data[0].datetime).format('MM/DD/YYYY hh:mm')}`);
                 }
+                // error handling
             }, error => {
                 if (error.response) {
                     // The request was made and the server responded with a status code
@@ -47,7 +53,6 @@ function commands(command, ...args) {
                     console.log("Error", error.message);
                 }
                 console.log(error.config);
-
             })
             break;
 
@@ -58,6 +63,7 @@ function commands(command, ...args) {
                 prevArgSpotify = el + ' ';
             })
 
+            // spotify api search
             spotify.search({
                 type: 'track',
                 query: prevArgSpotify
@@ -66,9 +72,8 @@ function commands(command, ...args) {
                     return console.log('Error occurred: ' + err);
                 }
 
-                // console.log(data);
+                // log relevant data
                 console.log(`\n"${data.tracks.items[0].name}" by ${data.tracks.items[0].artists[0].name} off of ${data.tracks.items[0].album.name}\n${data.tracks.items[0].external_urls.spotify}`);
-
             });
             break;
 
@@ -79,15 +84,17 @@ function commands(command, ...args) {
                 prevArgMovie = el + ' ';
             })
 
+            // call to omdb api
             axios.get(`http://www.omdbapi.com/?apikey=${omdbKey}&t=${prevArgMovie}`).then(response => {
-                // console.log(response);
                 
+                // if there is no ratings list, log without
                 if (response.data.Ratings == false) {
                     console.log(`\nTitle: ${response.data.Title}\nYear: ${response.data.Year}\nimdb Rating: N/A\nRotten Tomatoes Score: N/A\nCountry: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}`);
+                // log all relevant data
                 } else {
                     console.log(`\nTitle: ${response.data.Title}\nYear: ${response.data.Year}\nimdb Rating: ${response.data.Ratings[0]['Value']}\nRotten Tomatoes Score: ${response.data.Ratings[1]['Value']}\nCountry: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}`);
                 }
-
+            // error handling
             }, error => {
                 if (error.response) {
                     // The request was made and the server responded with a status code
@@ -108,11 +115,13 @@ function commands(command, ...args) {
             break;
 
         case 'do-what-it-says':
+            // read random.txt
             fs.readFile('random.txt', 'utf-8', (error, data) => {
                 if (error) {
                     return console.log(error);
                 }
 
+                // split by comma and pass spread array to commands function
                 let dataArr = data.split(',');
                 commands(...dataArr);
             })
