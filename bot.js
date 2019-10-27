@@ -2,11 +2,13 @@ require("dotenv").config();
 
 const axios = require('axios');
 
-const Spotify = require('node-spotify-api');
+const fs = require('fs');
 
 const Moment = require('moment')
 
 const keys = require("./keys.js");
+
+const Spotify = require('node-spotify-api');
 
 const spotify = new Spotify(keys.spotify);
 
@@ -106,7 +108,14 @@ function commands(command, ...args) {
             break;
 
         case 'do-what-it-says':
+            fs.readFile('random.txt', 'utf-8', (error, data) => {
+                if (error) {
+                    return console.log(error);
+                }
 
+                let dataArr = data.split(',');
+                commands(...dataArr);
+            })
             break;
 
         default:
