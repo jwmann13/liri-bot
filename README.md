@@ -30,9 +30,14 @@ node bot.js spotify-this-song [song title]
 node bot.js movie-this [movie title]
 ```
 There is one more command
-```node bot.js do-what-it-says```
+```
+node bot.js do-what-it-says
+```
+
 which will run the command inside the random.txt. At this time it is defaulted to
-```node bot.js spotify-this-song "I Want it That Way"```
+```
+node bot.js spotify-this-song "I Want it That Way"
+```
 
 LIRI Bot will log all commands into the log.txt file in the form
 ```[command], [all passed arguments]```
