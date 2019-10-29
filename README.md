@@ -4,22 +4,22 @@ LIRI Bot is a command tool that retrieves information on concerts from Bandsinto
 
 ## Getting Started
 
+### Installing
+
+To install LIRI Bot clone this repo
+```
+git clone git@github.com:jwmann13/liri-bot.git
+```
+
 ### Prerequisites
 
-LIRI Bot requires four node packages that are included in the package.json
-```npm install```
-will download the appropriate packages. However, if for some reason the package.json does not include the appropriate dependecies run:
+LIRI Bot requires four node packages that are included in the package.json ```npm install``` will download the appropriate packages. However, if for some reason the package.json does not include the appropriate dependecies run:
 ```
 npm install node-spotify-api
 npm install dotenv
 npm install moment
 npm install axios
 ```
-
-### Installing
-
-To install LIRI Bot clone this repo
-```git clone git@github.com:jwmann13/liri-bot.git```
 
 ## Features
 

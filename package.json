@@ -26,7 +26,7 @@
     "assistant"
   ],
   "author": "Jeffrey Mann",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jwmann13/liri-bot/issues"
   },
