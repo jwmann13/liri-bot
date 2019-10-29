@@ -2,6 +2,8 @@
 
 LIRI Bot is a command tool that retrieves information on concerts from Bandsintown, songs from Spotify, and movies from OMDB APIs. It was created as a homework assignment for the Georgia Tech Coding Bootcamp in October 2019.
 
+View a demo at: https://youtu.be/gzw-rYBgja0
+
 ## Getting Started
 
 ### Installing
